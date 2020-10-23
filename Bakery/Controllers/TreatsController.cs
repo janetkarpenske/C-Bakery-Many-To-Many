@@ -13,29 +13,25 @@ using System.Security.Claims;
 
 namespace Bakery.Controllers
 {
-  //[Authorize]
   public class TreatsController : Controller
   {
     private readonly BakeryContext _db;
-    //private readonly UserManager<ApplicationUser> _userManager; 
 
     public TreatsController(BakeryContext db)
     {
-      //_userManager = userManager;
       _db = db;
     }
 
-    //updated Index method
   public ActionResult Index()
   {
     List<Treat> model = _db.Treats.ToList();
       return View(model);
   }
+[Authorize]
 public ActionResult Create()
 {
     return View();
 }
-
 
     [HttpPost]
     public ActionResult Create(Treat treat)
@@ -53,7 +49,7 @@ public ActionResult Create()
         .FirstOrDefault(treat => treat.TreatId == id);
     return View(thisTreat);
     }
-
+[Authorize]
 public ActionResult Edit(int id)
 {
     var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
@@ -89,7 +85,7 @@ public ActionResult AddFlavor(Treat treat, int FlavorId)
     _db.SaveChanges();
     return RedirectToAction("Index");
 }
-
+[Authorize]
 public ActionResult Delete(int id)
 {
     var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
