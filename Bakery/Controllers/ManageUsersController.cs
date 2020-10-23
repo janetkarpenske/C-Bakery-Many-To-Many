@@ -19,13 +19,11 @@ namespace Bakery.Controllers
         {
             _userManager = userManager;
         }
-
         public async Task<IActionResult> Index()
         {
             var admins = (await _userManager
                 .GetUsersInRoleAsync("Administrator"))
                 .ToArray();
-
             var everyone = await _userManager.Users
                 .ToArrayAsync();
 
@@ -34,7 +32,6 @@ namespace Bakery.Controllers
                 Administrators = admins,
                 Everyone = everyone
             };
-
             return View(model);
         }
     }

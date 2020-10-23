@@ -11,24 +11,20 @@ namespace Bakery.Controllers
         private readonly BakeryContext _db;
         private readonly UserManager<ApplicationUser> _userManager; 
         private readonly SignInManager<ApplicationUser> _signInManager;
-
         public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, BakeryContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _db = db;
         }
-
         public ActionResult Index()
         {
             return View();
         }
-
         public IActionResult Register()
         {
             return View();
         }
-
         [HttpPost]
         public async Task<ActionResult> Register (RegisterViewModel model)
         {
@@ -43,12 +39,10 @@ namespace Bakery.Controllers
                 return View();
             }
         }
-
     public ActionResult Login()
 {
     return View();
 }
-
     [HttpPost]
     public async Task<ActionResult> Login(LoginViewModel model)
     {
@@ -62,7 +56,6 @@ namespace Bakery.Controllers
             return View();
         }
     }
-
     [HttpPost]
 public async Task<ActionResult> LogOff()
 {

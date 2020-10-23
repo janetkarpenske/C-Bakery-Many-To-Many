@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
@@ -32,7 +31,6 @@ namespace Bakery.Controllers
     {
       return View();
     }
-
     [HttpPost]
     public ActionResult Create(Flavor flavor)
     {
@@ -55,7 +53,6 @@ public ActionResult Details(int id)
       var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
       return View(thisFlavor);
     }
-
     [HttpPost]
     public ActionResult Edit(Flavor flavor)
     {
@@ -63,17 +60,12 @@ public ActionResult Details(int id)
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
-
-
-
     public ActionResult AddTreat(int id)
 {
     var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
     ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "TreatName");
     return View(thisFlavor);
 }
-
 [HttpPost]
 public ActionResult AddTreat(Flavor flavor, int TreatId)
 {
@@ -84,17 +76,27 @@ public ActionResult AddTreat(Flavor flavor, int TreatId)
     _db.SaveChanges();
     return RedirectToAction("Index");
 }
-
-
-
-
-
 [Authorize(Roles = "Administrator")]
   public ActionResult Delete(int id)
 {
     var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
     return View(thisFlavor);
 }
-
-
+[HttpPost, ActionName("Delete")]
+public ActionResult DeleteConfirmed(int id)
+{
+    var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
+    _db.Flavors.Remove(thisFlavor);
+    _db.SaveChanges();
+    return RedirectToAction("Index");
+}
+[HttpPost]
+public ActionResult DeleteTreat(int joinId)
+{
+    var joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
+    _db.FlavorTreat.Remove(joinEntry);
+    _db.SaveChanges();
+    return RedirectToAction("Index");
+}
+}
 }

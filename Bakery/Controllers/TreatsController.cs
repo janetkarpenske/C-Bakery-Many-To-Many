@@ -33,7 +33,6 @@ public ActionResult Create()
 {
     return View();
 }
-
     [HttpPost]
     public ActionResult Create(Treat treat)
     {
@@ -56,7 +55,6 @@ public ActionResult Edit(int id)
     var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
     return View(thisTreat);
 }
-
     [HttpPost]
     public ActionResult Edit(Treat treat, int FlavorId)
     {
@@ -68,14 +66,12 @@ public ActionResult Edit(int id)
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
     public ActionResult AddFlavor(int id)
 {
     var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
     ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
     return View(thisTreat);
 }
-
 [HttpPost]
 public ActionResult AddFlavor(Treat treat, int FlavorId)
 {
@@ -92,7 +88,6 @@ public ActionResult Delete(int id)
     var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
     return View(thisTreat);
 }
-
 [HttpPost, ActionName("Delete")]
 public ActionResult DeleteConfirmed(int id)
 {
@@ -101,7 +96,6 @@ public ActionResult DeleteConfirmed(int id)
     _db.SaveChanges();
     return RedirectToAction("Index");
 }
-
 [HttpPost]
 public ActionResult DeleteFlavor(int joinId)
 {
