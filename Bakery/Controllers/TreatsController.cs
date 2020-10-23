@@ -1,25 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Bakery.Models;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization; //allows us to authorize users
-using Microsoft.AspNetCore.Identity; //allows interactions with users from database
-using System.Threading.Tasks; //needed for asyncs tasks
-using System.Security.Claims; //need for claim-based authentication. Claim is who user is, not what they can do.
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Bakery.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly BakeryContext _db;
-    private readonly UserManager<ApplicationUser> _userManager; //new line
+    private readonly UserManager<ApplicationUser> _userManager; 
 
-    //updated constructor
     public TreatsController(UserManager<ApplicationUser> userManager, BakeryContext db)
     {
-      _userManager = userManager;
+     _userManager = userManager;
       _db = db;
     }
 
@@ -37,11 +37,10 @@ namespace Bakery.Controllers
   }
 public ActionResult Create()
 {
-    //ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
     return View();
 }
 
-[HttpPost] //create POST method is updated for authentication
+[HttpPost]
 public async Task<ActionResult> Create(Treat treat, int FlavorId)
 {
     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
