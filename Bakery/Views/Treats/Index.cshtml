@@ -18,7 +18,8 @@ else
 {
   <h3>No Treats have been added yet.</h3>
 } 
-
+@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+      {
 <p>@Html.ActionLink("Add New Treat", "Create")</p>
-
+      }
 <p>@Html.ActionLink("Home", "Index", "Home")</p>

@@ -12,6 +12,7 @@ using System.Security.Claims;
 
 namespace Bakery.Controllers
 {
+   [Authorize]
   public class FlavorsController : Controller
   {
   private readonly BakeryContext _db;
@@ -20,13 +21,13 @@ namespace Bakery.Controllers
     {
       _db = db;
     }
-
+[AllowAnonymous]
   public ActionResult Index()
   {
     List<Flavor> model = _db.Flavors.ToList();
       return View(model);
   }
-  [Authorize]
+  [Authorize(Roles = "Administrator")]
     public ActionResult Create()
     {
       return View();
@@ -39,6 +40,7 @@ namespace Bakery.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    [AllowAnonymous]
 public ActionResult Details(int id)
 {
     var thisFlavor = _db.Flavors
@@ -47,7 +49,7 @@ public ActionResult Details(int id)
         .FirstOrDefault(flavor => flavor.FlavorId == id);
     return View(thisFlavor);
 }
-[Authorize]
+[Authorize(Roles = "Administrator")]
     public ActionResult Edit(int id)
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
@@ -87,20 +89,12 @@ public ActionResult AddTreat(Flavor flavor, int TreatId)
 
 
 
-[Authorize]
+[Authorize(Roles = "Administrator")]
   public ActionResult Delete(int id)
 {
     var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
     return View(thisFlavor);
 }
 
-[HttpPost, ActionName("Delete")]
-public ActionResult DeleteConfirmed(int id)
-{
-    var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
-    _db.Flavors.Remove(thisFlavor);
-    _db.SaveChanges();
-    return RedirectToAction("Index");
-}
-}
+
 }
