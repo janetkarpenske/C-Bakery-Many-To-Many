@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-@model ToDoList.Models.Treat
+@model Bakery.Models.Treat
 
 <h4>Add a new Treat</h4>
 
@@ -11,8 +11,8 @@
     @Html.LabelFor(model => model.TreatName)
     @Html.TextBoxFor(model => model.TreatName)
 
-    @Html.Label("Select category")
-    @Html.DropDownList("CategoryId")
+    @* @Html.Label("Select category")
+    @Html.DropDownList("CategoryId") *@
 
     <input type="submit" value="Add Treat" class="btn btn-default" />
 }

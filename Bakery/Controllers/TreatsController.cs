@@ -23,17 +23,21 @@ namespace Bakery.Controllers
       _db = db;
     }
 
-public async Task<ActionResult> Index() //updated for authentication
-{
-    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value; //"this" refers to item controller itself. "?" is an existential operator- only does code to right if code to left does not return null.
-    var currentUser = await _userManager.FindByIdAsync(userId);
-    var userTreats = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).ToList();
-    return View(userTreats);
-}
-
+// public async Task<ActionResult> Index() //updated for authentication
+// {
+//     var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value; //"this" refers to item controller itself. "?" is an existential operator- only does code to right if code to left does not return null.
+//     var currentUser = await _userManager.FindByIdAsync(userId);
+//     var userTreats = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).ToList();
+//     return View(userTreats);
+// }
+  public ActionResult Index()
+  {
+    List<Treat> model = _db.Treats.ToList();
+      return View(model);
+  }
 public ActionResult Create()
 {
-    ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
+    //ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
     return View();
 }
 
@@ -64,7 +68,7 @@ public async Task<ActionResult> Create(Treat treat, int FlavorId)
 public ActionResult Edit(int id)
 {
     var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
-    ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
+    //ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
     return View(thisTreat);
 }
 
