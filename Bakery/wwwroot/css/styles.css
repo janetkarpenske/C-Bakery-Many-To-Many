@@ -20,3 +20,11 @@ body {
   background:#333;
   padding:12px;
 }
+a {
+  font-size: 20px;
+}
+img {
+  width: 550px;
+  height: 750px;
+  object-fit: cover;
+}
