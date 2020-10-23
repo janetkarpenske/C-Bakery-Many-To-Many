@@ -1,11 +1,13 @@
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bakery.Models
 {
-  public class BakeryContext : DbContext
+  public class BakeryContext : IdentityDbContext<ApplicationUser>
   {
-    //public DbSet<Item> Items { get; set; }
+    public virtual DbSet<Flavor> Flavors { get; set; }
+    public DbSet<Treat> Treats { get; set; }
+    public DbSet<FlavorTreat> FlavorTreat { get; set; }
 
     public BakeryContext(DbContextOptions options) : base(options) { }
   }
