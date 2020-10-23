@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Bakery.Models;
-using System.Threading.Tasks; //allows async
+using System.Threading.Tasks;
 using Bakery.ViewModels;
 
 namespace Bakery.Controllers
@@ -9,8 +9,8 @@ namespace Bakery.Controllers
     public class AccountController : Controller
     {
         private readonly BakeryContext _db;
-        private readonly UserManager<ApplicationUser> _userManager; //userManager handles saving and updating user info
-        private readonly SignInManager<ApplicationUser> _signInManager; //signInManager handles signing in
+        private readonly UserManager<ApplicationUser> _userManager; 
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         public AccountController (UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, BakeryContext db)
         {
@@ -29,11 +29,11 @@ namespace Bakery.Controllers
             return View();
         }
 
-        [HttpPost] //post method for registering an account is async because it needs the user to add info before it can do anything (obviously)
+        [HttpPost]
         public async Task<ActionResult> Register (RegisterViewModel model)
         {
             var user = new ApplicationUser { UserName = model.Email };
-            IdentityResult result = await _userManager.CreateAsync(user, model.Password); //note: Identity comes with default requirements for passwords yay
+            IdentityResult result = await _userManager.CreateAsync(user, model.Password); 
             if (result.Succeeded)
             {
                 return RedirectToAction("Index");
@@ -44,7 +44,7 @@ namespace Bakery.Controllers
             }
         }
 
-    public ActionResult Login() //next two allow user to login
+    public ActionResult Login()
 {
     return View();
 }
@@ -63,11 +63,11 @@ namespace Bakery.Controllers
         }
     }
 
-    [HttpPost] //allows user to log off
+    [HttpPost]
 public async Task<ActionResult> LogOff()
 {
     await _signInManager.SignOutAsync();
     return RedirectToAction("Index");
 }
-    }
+}
 }

@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System;
-using Microsoft.AspNetCore.Mvc;
+  using Microsoft.AspNetCore.Mvc;
 using Bakery.Models;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Bakery.Controllers
 {
@@ -70,5 +70,5 @@ public ActionResult DeleteConfirmed(int id)
     _db.SaveChanges();
     return RedirectToAction("Index");
 }
-  }
+}
 }
