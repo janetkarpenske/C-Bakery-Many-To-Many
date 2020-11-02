@@ -14,8 +14,10 @@ Not Applicable
 ## Setup/Installation Requirements
 
 * Download or Clone project from Github repository.
-* Open a terminal within Bakery.Tests folder within main project directory.
+* Open a terminal within Bakery folder within main project directory.
 * Use command: 'dotnet restore' to install.
+* Open the file janet_karpenske.sql, located within the main directory, and select "open with MySQL" to get database running.
+* In appsettings.json file change the "pwd=" portion to be followed by your personal password in this line: "DefaultConnection": "Server=localhost;Port=3306;database=janet_karpenske;uid=root;pwd=epicodus;
 * After installation, navigate to Bakery folder within main project directory and use command 'dotnet run'. 
 * Follow terminal prompts to see application run.
 
@@ -29,7 +31,7 @@ https://github.com/janetkarpenske
 
 ## Technologies Used
 
-C#, MVCTest, and Markdown.
+VSCode, C#, ASP.NET Core MVC, MySQL Workbench, Entity Framework Core 2.2.0, and Markdown.
 
 ## Link To Active Site:
 Not Applicable
