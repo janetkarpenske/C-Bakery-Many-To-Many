@@ -10,11 +10,8 @@ namespace Bakery.Models
         }
 
         public int TreatId { get; set; }
-        public string TreatName { get; set; }
-        //public virtual ApplicationUser User { get; set; }    
+        public string TreatName { get; set; }  
 
         public ICollection<FlavorTreat> Flavors { get;}
     }
 }
-
-//Item to Treat, Category to Flavor

@@ -15,7 +15,7 @@ namespace Bakery.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
 
         public ManageUsersController(
-            UserManager<ApplicationUser> userManager)
+        UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
